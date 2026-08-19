@@ -2,6 +2,8 @@ import 'package:expense_tracker/common/common_colors.dart';
 import 'package:expense_tracker/common/common_text_field.dart';
 import 'package:expense_tracker/features/auth/view/screens/login_screen.dart';
 import 'package:expense_tracker/features/auth/view/widgets/common_button.dart';
+import 'package:expense_tracker/features/dashboard/view/screens/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as logger;
 
@@ -47,8 +49,58 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 CommonButton(
                   buttonName: "SIGNUP",
-                  onPressed: () {
-                    logger.log("button pressed");
+                  onPressed: () async {
+                    try {
+                      String email = emailController.text.trim();
+                      String password = passwordController.text.trim();
+                      String confirmPassword = confirmPasswordController.text
+                          .trim();
+                      if (email.isEmpty ||
+                          password.isEmpty ||
+                          confirmPassword.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: CommonColors.primaryColor,
+                            content: Text("Empty fields not allowed"),
+                          ),
+                        );
+                        return;
+                      } else {
+                        if (password != confirmPassword) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              behavior: SnackBarBehavior.floating,
+                              backgroundColor: CommonColors.primaryColor,
+                              content: Text(
+                                "Password and confirmpassword must match!",
+                              ),
+                            ),
+                          );
+                          return;
+                        } else {
+                          await FirebaseAuth.instance
+                              .createUserWithEmailAndPassword(
+                                email: email,
+                                password: password,
+                              );
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomeScreen(),
+                            ),
+                          );
+                        }
+                      }
+                    } catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          behavior: SnackBarBehavior.floating,
+                          backgroundColor: CommonColors.primaryColor,
+                          content: Text(e.toString()),
+                        ),
+                      );
+                    }
                   },
                 ),
                 Row(
