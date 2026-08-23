@@ -1,5 +1,8 @@
+import 'package:expense_tracker/common/common_colors.dart';
 import 'package:expense_tracker/features/auth/view/screens/login_screen.dart';
 import 'package:expense_tracker/features/dashboard/controller/bottom_navbar_provider.dart';
+import 'package:expense_tracker/features/dashboard/controller/dropdown_provider.dart';
+import 'package:expense_tracker/features/dashboard/view/screens/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +14,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => BottomNavbarProvider()),
+        ChangeNotifierProvider(create: (context) => DropdownProvider()),
       ],
       child: MyApp(),
     ),
@@ -22,6 +26,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: LoginScreen());
+    return MaterialApp(
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          backgroundColor: CommonColors.primaryColor,
+          foregroundColor: Colors.white,
+        ),
+        scaffoldBackgroundColor: Colors.green[50],
+      ),
+      debugShowCheckedModeBanner: false,
+      home: HomeScreen(),
+    );
   }
 }

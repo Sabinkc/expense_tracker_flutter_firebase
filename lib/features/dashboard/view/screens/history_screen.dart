@@ -13,7 +13,43 @@ class HistoryScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: CommonColors.primaryColor,
       ),
-      body: Center(child: Text("History screen")),
+      body: ListView.builder(
+        itemCount: 5,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                border: Border(left: BorderSide(color: Colors.red, width: 4)),
+                color: Colors.white,
+              ),
+              child: Column(
+                spacing: 10,
+                children: [
+                  Row(
+                    mainAxisAlignment: .spaceBetween,
+                    children: [Text("Category: Food"), Text("Amount:300")],
+                  ),
+                  Row(
+                    mainAxisAlignment: .spaceBetween,
+                    children: [
+                      Text("Title: Lunch"),
+                      Row(
+                        spacing: 5,
+                        children: [
+                          Icon(Icons.edit_outlined, color: Colors.blue[200]),
+                          Icon(Icons.delete_outline, color: Colors.red[200]),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

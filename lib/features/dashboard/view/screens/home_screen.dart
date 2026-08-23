@@ -1,5 +1,6 @@
 import 'package:expense_tracker/common/common_colors.dart';
 import 'package:expense_tracker/features/dashboard/controller/bottom_navbar_provider.dart';
+import 'package:expense_tracker/features/dashboard/view/screens/add_expense_screen.dart';
 import 'package:expense_tracker/features/dashboard/view/screens/dashbord_screen.dart';
 import 'package:expense_tracker/features/dashboard/view/screens/history_screen.dart';
 import 'package:expense_tracker/features/dashboard/view/screens/settings_screen.dart';
@@ -33,6 +34,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
+     
     );
   }
 }
