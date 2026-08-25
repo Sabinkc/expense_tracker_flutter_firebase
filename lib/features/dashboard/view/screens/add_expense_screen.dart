@@ -19,6 +19,13 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
   TextEditingController titleController = TextEditingController();
 
   @override
+  void dispose() {
+    amountController.dispose();
+    titleController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Add expenses")),
