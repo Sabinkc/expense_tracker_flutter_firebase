@@ -4,11 +4,18 @@ import 'package:flutter/material.dart';
 class ExpenseTextfield extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
-  const ExpenseTextfield({super.key, required this.hintText, required this.controller});
+  final TextInputType inputType;
+  const ExpenseTextfield({
+    super.key,
+    required this.hintText,
+    required this.controller,
+    this.inputType = TextInputType.text,
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      keyboardType: inputType,
       controller: controller,
       decoration: InputDecoration(
         hintText: hintText,

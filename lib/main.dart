@@ -2,7 +2,6 @@ import 'package:expense_tracker/common/common_colors.dart';
 import 'package:expense_tracker/features/auth/view/screens/login_screen.dart';
 import 'package:expense_tracker/features/dashboard/controller/bottom_navbar_provider.dart';
 import 'package:expense_tracker/features/dashboard/controller/dropdown_provider.dart';
-import 'package:expense_tracker/features/dashboard/view/screens/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -39,3 +38,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
