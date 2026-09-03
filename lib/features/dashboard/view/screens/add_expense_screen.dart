@@ -3,6 +3,7 @@ import 'package:expense_tracker/common/common_colors.dart';
 import 'package:expense_tracker/common/common_text_field.dart';
 import 'package:expense_tracker/features/dashboard/controller/dropdown_provider.dart';
 import 'package:expense_tracker/features/dashboard/view/widgets/expense_textfield.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as logger;
 
@@ -58,11 +59,12 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                     // focusColor: Colors.white,
                     iconEnabledColor: Colors.red,
                     hint: Text("Choose a category"),
-                    value: provider.value,
+                    value: provider.value, //null
                     // dropdownColor: Colors.red,
                     items: List.generate(provider.categories.length, (index) {
                       return DropdownMenuItem(
-                        value: provider.categories[index]["categoryName"],
+                        value: provider
+                            .categories[index]["categoryName"], //test1categoy, test2category
                         child: Text(provider.categories[index]["categoryName"]),
                       );
                     }),
@@ -121,6 +123,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                           "categoryName": category,
                           "amount": int.parse(amount),
                           "title": title,
+                          "userId": FirebaseAuth.instance.currentUser!.uid,
                         });
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
