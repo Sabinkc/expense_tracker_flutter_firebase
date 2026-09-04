@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expense_tracker/common/common_colors.dart';
 import 'package:expense_tracker/common/common_text_field.dart';
 import 'package:expense_tracker/features/dashboard/controller/dropdown_provider.dart';
+import 'package:expense_tracker/features/dashboard/controller/expense_history_provider.dart';
 import 'package:expense_tracker/features/dashboard/view/widgets/expense_textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -125,6 +126,9 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                           "title": title,
                           "userId": FirebaseAuth.instance.currentUser!.uid,
                         });
+                    await context
+                        .read<ExpenseHistoryProvider>()
+                        .fetchExpenses();
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         backgroundColor: CommonColors.primaryColor,

@@ -25,10 +25,42 @@ class ExpenseHistoryProvider extends ChangeNotifier {
         });
       }
       notifyListeners();
-      logger.log(expenses.toString());
+      // logger.log(expenses.toString());
     } catch (e) {
       logger.log(e.toString());
     }
+  }
+
+  Map<String, num> getCategoryTotal() {
+    // expenses = [
+    //   {"title": "Lunch", "categoryName": "Food", "amount": 100},
+    //   {"title": "Bus", "categoryName": "Transportation", "amount": 200},
+    //   {"title": "Bus", "categoryName": "Transportation", "amount": 300},
+    //   {"title": "Bus", "categoryName": "food", "amount": 300},
+    //   {"title": "Bus", "categoryName": "tranportation", "amount": 300},
+    // ];
+    Map<String, num> categoryAmount = {};
+    for (var expense in expenses) {
+      String category = expense['categoryName']; //transportation
+
+      num amount = expense["amount"]; //300
+      if (categoryAmount.containsKey(category)) {
+        categoryAmount[category] =
+            categoryAmount[category]! + amount; //200 + 300
+      } else {
+        categoryAmount[category] = amount;
+      }
+    }
+    return categoryAmount;
+  }
+
+  double getTotalAmount() {
+    double total = 0;
+
+    for (var expense in expenses) {
+      total = total + expense["amount"];
+    }
+    return total;
   }
 
   Map expenseWithDocid = {
